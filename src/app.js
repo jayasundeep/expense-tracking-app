@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import "./styles/styles.scss";
 import '../node_modules/normalize-css/normalize';
+import 'react-dates/lib/css/_datepicker.css';
 
 import AppRouter from './routes/AppRouter';
 

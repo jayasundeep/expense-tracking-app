@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const ExpenseListItem = (props) => (
     <div>
         <h3>
+            
             {props.index}. 
             <Link to={`/edit/${props.expense.id}`}>
                 {props.expense.description}

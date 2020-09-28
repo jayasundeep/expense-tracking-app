@@ -1,6 +1,6 @@
 const expenseReducerDefaultState = [];
 
-const expenseReducer = (state = expenseReducerDefaultState, action) => {
+const expenseReducer = (state = expenseReducerDefaultState, action = {}) => {
     switch (action.type) {
         case 'ADD_EXPENSE':
             return state.concat(action.expense)

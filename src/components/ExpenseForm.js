@@ -2,17 +2,16 @@ import React from 'react';
 import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import  moment from 'moment';
-import 'react-dates/lib/css/_datepicker.css';
 
 export default class ExpenseForm extends React.Component {
     constructor (props) {
         super(props);
-        console.log(props.expense[0]);
+        // console.log(props.expense);
         this.state = {
-            description : this.props.expense ? this.props.expense[0].description : '',
-            amount : this.props.expense ? this.props.expense[0].amount.toString() : '',
-            note : this.props.expense ? this.props.expense[0].note : '',
-            createdAt : this.props.expense ? moment(this.props.expense[0].createdAt) : moment(),
+            description : this.props.expense ? this.props.expense.description : '',
+            amount : this.props.expense ? this.props.expense.amount.toString() : '',
+            note : this.props.expense ? this.props.expense.note : '',
+            createdAt : this.props.expense ? moment(this.props.expense.createdAt) : moment(),
             calenderFocused : false,
             error : undefined
         }
@@ -34,7 +33,7 @@ export default class ExpenseForm extends React.Component {
     onDateChange = (createdAt) => {
         this.setState(() => ({ createdAt }))
     }
-    onFocusChange = ({focused}) => {
+    onFocusChange = ({ focused }) => {
         this.setState(() => ({ calenderFocused : focused }))
     }
     onSubmit = (e) => {

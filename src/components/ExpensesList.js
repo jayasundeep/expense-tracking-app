@@ -2,16 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseListItem from './ExpenseListItem';
 import getVisibleExpenses from '../selectors/selectors';
-import ExpenseFilterText from './ExpenseListFilters';
+import ExpenseFilters from './ExpenseListFilters';
 
 
-const ExpenseList = (props) => (
+export const ExpenseList = (props) => (
     <div>
         <h2>Expense List</h2>
-        <ExpenseFilterText />
-        {props.expenses.map((expense, index) => {
-            return <ExpenseListItem index={index+1} expense={expense} key={expense.id}/>
-        })}
+        <ExpenseFilters />
+        {props.expenses.length === 0 ? 
+            <p>Hey, you can add your expenses here!</p> 
+            :
+            props.expenses.map((expense, index) => {
+                return <ExpenseListItem index={index+1} expense={expense} key={expense.id}/>
+            })
+        }
     </div>
 );
 

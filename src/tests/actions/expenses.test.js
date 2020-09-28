@@ -33,7 +33,7 @@ test('should add expense', () => {
             id : expect.any(String)
         }
     })
-})
+});
 
 test('should add default expense values', () => {
     const expenseData = {}
@@ -48,4 +48,4 @@ test('should add default expense values', () => {
             id : expect.any(String)
         }
     })
-})
+});
