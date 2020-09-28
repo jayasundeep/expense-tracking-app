@@ -10,7 +10,7 @@ export const ExpenseList = (props) => (
         <h2>Expense List</h2>
         <ExpenseFilters />
         {props.expenses.length === 0 ? 
-            <p>Hey, you can add your expenses here!</p> 
+            <p>Hey, There are no expenses here!</p> 
             :
             props.expenses.map((expense, index) => {
                 return <ExpenseListItem index={index+1} expense={expense} key={expense.id}/>
