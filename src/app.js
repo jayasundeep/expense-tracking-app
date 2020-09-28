@@ -24,11 +24,6 @@ store.subscribe(() => {
 
 // store.dispatch(setFilterText('water'));
 
-const expenseOne = store.dispatch(addExpense({ description : 'Water Bill', amount : 250, createdAt : Date.now()}));
-const expenseThree = store.dispatch(addExpense({ description : 'Rent', amount : 500, createdAt : Date.now()}));
-const expenseTwo = store.dispatch(addExpense({ description : 'Gas Bill', amount : 350, createdAt : 1000 }));
-
-
 const jsx = (
     <Provider store={store}>
         <AppRouter />
