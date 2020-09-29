@@ -5,6 +5,7 @@ exports[`should render all the expenses 1`] = `
   <h2>
     Expense List
   </h2>
+  <Connect(ExpenseSummary) />
   <Connect(ExpenseFilters) />
   <ExpenseListItem
     expense={
@@ -66,6 +67,7 @@ exports[`should render empty message 1`] = `
   <h2>
     Expense List
   </h2>
+  <Connect(ExpenseSummary) />
   <Connect(ExpenseFilters) />
   <p>
     Hey, There are no expenses here!
