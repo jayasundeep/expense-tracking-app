@@ -12,9 +12,9 @@ exports[`renders one expense item correctly 1`] = `
   </h3>
   <div>
     Amount: 
-    4500
-    Created At: 
-    172800000
+    $4,500.00
+    - Created At: 
+    January 3rd, 1970
   </div>
 </div>
 `;

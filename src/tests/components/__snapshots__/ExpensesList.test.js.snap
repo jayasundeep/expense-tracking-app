@@ -68,7 +68,7 @@ exports[`should render empty message 1`] = `
   </h2>
   <Connect(ExpenseFilters) />
   <p>
-    Hey, you can add your expenses here!
+    Hey, There are no expenses here!
   </p>
 </div>
 `;
