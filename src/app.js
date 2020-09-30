@@ -13,6 +13,7 @@ import createStore from './store/redux-store';
 import { addExpense } from './actions/expenses';
 import { setFilterText, sortByAmount, sortByDate, setStartDate, setEndDate } from './actions/filters';
 import getVisibleExpenses from './selectors/selectors';
+import './firebase/firebase';
 
 
 const store = createStore();
