@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import database from '../firebase/firebase';
 
 export const addExpense = (expense = {}) => ({
@@ -38,7 +38,22 @@ export const editExpense = (id, updates = {}) =>
     updates
 });
 
-export const getExpense = (id) => ({
-    type : 'GET_EXPENSE',
-    id
+export const setExpense = (expense = {}) => ({
+    type : 'SET_EXPENSE',
+    expense
 });
+
+export const startSetExpense = () => {
+    return (dispatch) => {
+        return database.ref('expenses').once('value').then((snapshot) => {
+                const expenses = [];
+                snapshot.forEach((childSnapshot) => {
+                    expenses.push({
+                        id : childSnapshot.key,
+                        ...childSnapshot.val()
+                    });
+                });
+                dispatch(setExpense(expenses));
+            });
+    }
+};

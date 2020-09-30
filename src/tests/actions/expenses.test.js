@@ -1,9 +1,19 @@
-import { addExpense, editExpense, removeExpense, startAddExpense } from '../../actions/expenses';
+import { addExpense, editExpense, removeExpense, startAddExpense, setExpense, startSetExpense } from '../../actions/expenses';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import database from '../../firebase/firebase';
+import expenses from '../fixtures/expenses';
 
 const mockStore = configureStore([thunk]);
+
+beforeEach((done) => {
+    const expenseData = {};
+    expenses.forEach(({ id, description, note, amount, createdAt }) => {
+        expenseData[id] = { description, note, amount, createdAt };
+    });
+    database.ref('expenses').set(expenseData)
+    .then(() => done());
+});
 
 test('should edit expense', () => {
     const action = editExpense(12345, { description : 'random'});
@@ -67,6 +77,18 @@ test('should add default expense values', () => {
         return database.ref(`expenses/${actions[0].expense.id}`).once('value');
     }).then((snapshot) => {
         expect(snapshot.val()).toEqual(defaultExpenseData);
+        done();
+    });
+});
+
+test('should create set expense action', (done) => {
+    const store = mockStore({});
+    store.dispatch(startSetExpense()).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type : 'SET_EXPENSE',
+            expense: expenses
+        });
         done();
     });
 });

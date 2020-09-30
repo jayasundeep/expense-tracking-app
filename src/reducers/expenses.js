@@ -17,10 +17,8 @@ const expenseReducer = (state = expenseReducerDefaultState, action = {}) => {
                     return expense;
                 }
             })
-        case 'GET_EXPENSE':
-            return state.filter((expense) => {
-                return expense.id == action.id
-            })
+        case 'SET_EXPENSE':
+            return action.expense;
         default :
             return state
             

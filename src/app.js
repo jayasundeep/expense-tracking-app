@@ -10,18 +10,18 @@ import 'react-dates/lib/css/_datepicker.css';
 import AppRouter from './routes/AppRouter';
 
 import createStore from './store/redux-store';
-import { addExpense } from './actions/expenses';
-import { setFilterText, sortByAmount, sortByDate, setStartDate, setEndDate } from './actions/filters';
-import getVisibleExpenses from './selectors/selectors';
-import './firebase/firebase';
+import { addExpense, startSetExpense } from './actions/expenses';
+// import { setFilterText, sortByAmount, sortByDate, setStartDate, setEndDate } from './actions/filters';
+// import getVisibleExpenses from './selectors/selectors';
+// import './firebase/firebase';
 
 
 const store = createStore();
 
-store.subscribe(() => {
+/* store.subscribe(() => {
     const state = store.getState();
     const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
-});
+});  */
 
 // store.dispatch(setFilterText('water'));
 
@@ -31,8 +31,11 @@ const jsx = (
     </Provider>
 );
 
+ReactDOM.render(<p> Loading... </p>, document.getElementById('app'));
 
-ReactDOM.render(jsx, document.getElementById('app'));
+store.dispatch(startSetExpense()).then(() => {
+    ReactDOM.render(jsx, document.getElementById('app'));
+});
 
 
 /* <div><Link to='/'>Go Home</Link></div>

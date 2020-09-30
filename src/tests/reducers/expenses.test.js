@@ -76,3 +76,12 @@ test('should not remove the non existing item', () => {
     const result = expenseReducer(expenses, action);
     expect(result).toEqual(expenses);
 });
+
+test('should set the expenses', () => {
+    const action = {
+        type : 'SET_EXPENSE',
+        expense : expenses
+    };
+    const state = expenseReducer({}, action);
+    expect(state).toEqual(expenses);
+});
