@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Router, BrowserRouter, Route, Switch } from 'react-router-dom'
 
 
 import Header from '../components/Header';
@@ -9,21 +9,26 @@ import AddExpencePage from '../components/AddExpencePage';
 import EditExpencePage from '../components/EditExpencePage';
 import HelpComponent from '../components/HelpComponent';
 import NotFoundpage from '../components/NotFoundpage';
+import LoginPage from '../components/LoginPage';
+import { createBrowserHistory } from 'history';
+import PrivateRoute from './PrivateRoute';
+
+export const history = createBrowserHistory();
 
 const AppRouter = () => (
-    <BrowserRouter>
+    <Router history={history} >
         <div>
-            <Header />
             <Switch>
-                <Route path='/' component={ExpenceDashBoardpage} exact={true} />
-                <Route path='/create' component={AddExpencePage} />
-                <Route path='/edit' component={EditExpencePage} exact={true}/>
-                <Route path='/edit/:id' component={EditExpencePage} />
-                <Route path='/help' component={HelpComponent} />
+                <Route path="/" component={LoginPage} exact={true} />
+                <PrivateRoute path="/dashboard" component={ExpenceDashBoardpage} />
+                <PrivateRoute path="/create" component={AddExpencePage} />
+                <PrivateRoute path="/edit" component={EditExpencePage} exact={true}/>
+                <PrivateRoute path="/edit/:id" component={EditExpencePage} />
+                <Route path="/help" component={HelpComponent} />
                 <Route component={NotFoundpage} />
             </Switch>
         </div>
-    </BrowserRouter>
+    </Router>
 );
 
 export default AppRouter;

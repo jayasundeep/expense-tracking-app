@@ -7,13 +7,14 @@ import "./styles/styles.scss";
 import '../node_modules/normalize-css/normalize';
 import 'react-dates/lib/css/_datepicker.css';
 
-import AppRouter from './routes/AppRouter';
+import AppRouter, { history } from './routes/AppRouter';
 
 import createStore from './store/redux-store';
 import { addExpense, startSetExpense } from './actions/expenses';
-// import { setFilterText, sortByAmount, sortByDate, setStartDate, setEndDate } from './actions/filters';
+import { login, logout } from './actions/auth';
 // import getVisibleExpenses from './selectors/selectors';
-// import './firebase/firebase';
+import { firebase } from './firebase/firebase';
+import { render } from 'enzyme';
 
 
 const store = createStore();
@@ -33,8 +34,28 @@ const jsx = (
 
 ReactDOM.render(<p> Loading... </p>, document.getElementById('app'));
 
-store.dispatch(startSetExpense()).then(() => {
-    ReactDOM.render(jsx, document.getElementById('app'));
+let hasRendered = false;
+const renderApp = () => {
+    if(!hasRendered){
+        ReactDOM.render(jsx, document.getElementById('app'));
+    }
+};
+
+firebase.auth().onAuthStateChanged((user) => {
+    if(user){
+        console.log('uid:', user.uid, 'email:', user.email);
+        store.dispatch(login(user.uid));
+        store.dispatch(startSetExpense()).then(() => {
+            renderApp();
+            if(history.location.pathname === '/'){
+                history.push('/dashboard');
+            }
+        });
+    }else {
+        store.dispatch(logout());
+        renderApp();
+        history.push("/");
+    }
 });
 
 

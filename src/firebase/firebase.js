@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/database'; // If using Firebase database
 
 // Add the Firebase services that you want to use
-// import "firebase/auth";
+import "firebase/auth";
 // import "firebase/firestore";
 
 const firebaseConfig = {
@@ -19,11 +19,11 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 const database = firebase.database();
 
-export { database as default, firebase };
+export { database as default, firebase, googleAuthProvider };
 
 
 /* database.ref().set({
